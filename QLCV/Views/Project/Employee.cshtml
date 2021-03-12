@@ -1,0 +1,55 @@
+﻿@model QLCV.Models.Employee
+
+
+@{ var employee = "employeeid" + Model.Id;
+   var employeeId = "#employeeid" + Model.Id;
+    } 
+<div>
+    <a class="btn btn-primary" data-toggle="collapse" href="@employeeId" role="button" data-parent="@employeeId" aria-expanded="false" aria-controls="@employee">
+        <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" role="presentation"><path d="M8.292 10.293a1.009 1.009 0 0 0 0 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 0 0 0-1.419.987.987 0 0 0-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 0 0-1.406 0z" fill="currentColor" fill-rule="evenodd"></path></svg>
+        <span>@Model.Name</span>
+    </a>
+    
+</div>
+<div id="@employee" class="collapse">
+    <div id="list-task">
+
+    </div>
+    <input type="hidden" value="@Model.Id" id="employeeId" />
+    <div> <a data-id="@Model.Id" class="btn btn-primary btn-sm btn-add-job">Giao Việc</a></div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".btn-add-job").off('click').on('click', function (e) {
+            showLoading();
+            var idEmpoyee = $(this).attr("data-id");
+            $.ajax({
+                url: project.urlDomain + "/AddTask?employeeId=" + idEmpoyee,
+                method: "Get",
+                success: function (data) {
+                    showContentModal(data, "Thêm với công việc");
+                }
+            }).then(function () {
+                hideLoading()
+            })
+        })
+        GetListTask();
+    })
+    $(document).on('click', '.navbar-collapse.in', function (e) {
+        if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
+            $(this).collapse('hide');
+        }
+    });
+    function GetListTask() {
+        $.ajax({
+            url: '/project/ListTasks?projectId=' + $("#txtId").val() + '&employId=' + $("#employeeId").val(),
+            method: "GET",
+            success: function (data) {
+                $("#list-task").html("");
+                $("#list-task").html(data)
+            }
+        })
+    }
+</script>

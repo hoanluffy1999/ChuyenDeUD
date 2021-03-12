@@ -1,0 +1,327 @@
+﻿<aside class="main-sidebar sidebar-dark-success  elevation-4">
+    @*Brand Logo*@
+    @*<a href="../index3.html" class="brand-link">
+        <img src="/user/0fb392f7-8b38-488d-9e14-221f004b337b.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light" ></span>
+    </a>*@
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="slimscroll-menu">
+           @*// Sidebar user panel (optional)*@
+            @*<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="/user/0fb392f7-8b38-488d-9e14-221f004b337b.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="~/User/update" class="d-block" style="font-family:"> Kim Anh </a>
+                </div>
+            </div>*@
+
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item menu-open">
+                        <a href="/" class="nav-link ">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>Trang chủ</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Department/index" class="nav-link ">
+                            <i class="far fa-circle nav-icon"></i>
+                            Phòng ban
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Employee/index" class="nav-link ">
+                            <i class="far fa-circle nav-icon"></i>
+                            Nhân viên
+                        </a>
+                    </li>
+                    
+                    @*<li class="nav-header"> THIẾT LẬP DỮ LIỆU </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <p>
+                    Quản lý đối tác
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 1rem">
+
+                <li class="nav-item">
+                    <a href="/partner/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Quản lý nhà cung cấp
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/customer/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Quản lý khách hàng
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-header"> HOẠT ĐỘNG NHẬP - XUẤT </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-file-import"></i>
+                <p>
+                    Dữ liệu nhập kho
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 1rem">
+
+                <li class="nav-item">
+                    <a href="/bill/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Nhập kho
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/bill/list-import " class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Sản phẩm đã nhập
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-truck"></i>
+                <p>
+                    Dữ liệu xuất kho
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 1rem">
+                <li class="nav-item">
+                    <a href="/outbill/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Xuất kho
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/outbill/list-export " class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Sản phẩm đã xuất
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="nav-header"> BÁO CÁO THỐNG KÊ </li>
+        <li class="nav-item">
+            <a href="/ " class="nav-link ">
+                <i class="fas fa-chart-pie"></i>
+                Thống kê tồn đầu
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/ " class="nav-link ">
+                <i class="far fa-chart-bar"></i>
+                Thống kê doanh thu
+            </a>
+        </li>
+        <li class="nav-header"> THIẾT LẬP HỆ THỐNG </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-cogs"></i>
+                <p>
+                    Quản trị hệ thống
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 1rem;">
+                <li class="nav-item">
+                    <a href="/user/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Quản lý người dùng
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/role/index" class="nav-link ">
+                        <i class="far fa-circle nav-icon"></i>
+                        Quản lý quyền
+                    </a>
+                </li>
+            </ul>
+        <li class="nav-item">
+            <a href="/user/changepass" class="nav-link">
+                <p><i class="fas fa-user-lock"></i> Đổi mật khẩu</p>
+            </a>
+        </li>*@
+
+
+
+
+
+
+
+
+                    @*<li class="nav-item">
+            <a href="" class="nav-link" style="border-bottom: 1px solid;">
+                <i class="fas fa-box-open"></i>
+                <p>Quản lý danh mục</p>
+                <span class="menu-arrow"></span>
+            </a>
+            <ul class="nav nav-treeview" aria-expanded="false">
+                <li>
+                    <a href="/category/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý loại sản phẩm
+                    </a>
+                </li>
+                <li>
+                    <a href="/brand/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý hãng xe
+                    </a>
+                </li>
+                <li>
+                    <a href="/producer/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý nhà sản xuất
+                    </a>
+                </li>
+                <li>
+                    <a href="/location/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý gian hàng
+                    </a>
+                </li>
+                <li>
+                    <a href="/unit/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý đơn vị
+                    </a>
+                </li>
+                <li>
+                    <a href="/product/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý sản phẩm
+                    </a>
+                </li>
+            </ul>
+
+        </li>*@
+
+                    @*<li class="nav-item">
+            <a href="" class="nav-link" style="border-bottom: 1px solid;">
+                <i class="fas fa-users"></i>
+                <p>Quản lý đối tác</p>
+            </a>
+            <ul class="nav nav-treeview" aria-expanded="false">
+                <li>
+                    <a href="/partner/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý nhà cung cấp
+                    </a>
+                </li>
+                <li>
+                    <a href="/customer/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý khách hàng
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="" class="nav-link" style="border-bottom: 1px solid;">
+                <i class="far fa-file-alt"></i>
+                <p>Quản lý nhập - xuất</p>
+            </a>
+            <ul class="nav nav-treeview" aria-expanded="false">
+                <li>
+                    <a href="/bill/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý phiếu nhập
+                    </a>
+                </li>
+                <li>
+                    <a href="/outbill/list" class="nav-link " style="border-bottom: 1px solid;">
+                        <i class="fas fa-chevron-circle-right"></i>
+                        Quản lý phiếu xuất
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+                    @*<li class="nav-item">
+            <a href="" class="nav-link" style="border-bottom: 1px solid;">
+                <i class="far fa-clipboard"></i>
+                <p>Báo cáo thống kê</p>
+            </a>
+        </li>*@
+
+                    @*@{
+
+            foreach (var item in parentMenu)
+            {
+
+                var menuChild = data.Where(c => c.ParentId == item.Id && c.IsMenu).ToList().OrderBy(x => x.DisplayOrder).ToList();
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link" style="border-bottom: 1px solid;">
+                        @if (item.Url.Contains("He-thong"))
+                        {
+                            <i class="nav-icon fas fa-users-cog"></i>
+                        }
+                        else if (item.Url.Contains("/bai-viet"))
+                        {
+                            <i class="nav-icon far fa-newspaper"></i>
+                        }
+                        else if (item.Url.Contains("/khac"))
+                        {
+                            <i class="nav-icon fas fa-folder-plus"></i>
+                        }
+                        else if (item.Url.Contains("van-ban"))
+                        {
+                            <i class="nav-icon fas fa-file-alt"></i>
+                        }
+                        else
+                        {
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                        }
+                        <p>
+                            @item.Name
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    @{
+                        if (menuChild.Count > 0)
+                        {
+                            <ul class="nav nav-treeview">
+                                @{
+                                    foreach (var itemChild in menuChild)
+                                    {
+
+                                        <li class="nav-item">
+
+                                            <a href="@itemChild.Url" class="nav-link" style="border-bottom: 1px dashed;">
+                                                <i class="nav-icon">-</i>
+                                                <p>@itemChild.Name</p>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        }
+                    }
+                </li>
+
+            }
+        }*@
+
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+</aside>

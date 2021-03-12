@@ -1,0 +1,81 @@
+﻿@model QLCV.Models.Project
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết dự án</h2>
+<input type="hidden" value="@Model.Id" id="txtId" />
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header border-0" style="height:60px">
+                <div class="row" id="frmFilter">
+
+                    @*<div class="col-4">
+                        <div class="form-group">
+                            <button id="add-employee" class="btn btn-primary">Thêm thành viên</button>
+                        </div>
+                    </div>*@
+                    <div class="col-4">
+                        <div class="form-group">
+                            <button id="add-task" class="btn btn-primary">Thêm việc</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+<div>
+    <div id="dtTable">
+    </div>
+</div>
+<script>
+  /*  project.init();*/
+    var frmFilter = $('#frmFilter');
+    var urlDomain = "/Project";
+    var take = 10;
+    var skip = 0;
+    $(document).ready(function () {
+        getData("", -1);
+        searching();
+        frmFilter.find('#btnCreate').on('click', function () {
+            openCreate();
+        });
+    });
+    function searching() {
+        frmFilter.find("#btnSearch").on('click', function () {
+            var name = frmFilter.find("#txtName").val();
+            var status = frmFilter.find("#drStatus").val()
+            getData(name, status);
+        });
+    }
+    function getData(name, status) {
+        showLoading()
+        $.ajax({
+            url: urlDomain + "/ListTasks?id=" + $("#txtId").val(),
+            method: "GET"
+            , success: function (response) {
+                $('#dtTable').html(response);
+                hideLoading()
+            }
+        })
+    }
+    //function filterData(txtSearch) {
+    //    var oTable = dtTable.find('#tblDisplay').DataTable();
+    //    oTable.fn
+    //}
+    function openCreate() {
+        $.ajax({
+            url: urlDomain + "/add-task?id=" + $("#txtId").val(),
+            method: "Get",
+            success: function (response) {
+                showContentModal(response, "Tạo mới nhiệm vụ")
+            }
+        });
+    }
+</script>

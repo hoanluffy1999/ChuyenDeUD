@@ -1,0 +1,39 @@
+﻿@model List<QLCV.Models.Rate>
+<div class="form-group">
+    <div class="row">
+        <input type="hidden" id="txtJobId" value="@ViewData["JobId"]">
+        <label class="col-sm-3" required>Chọn đánh giá </label>
+        <div class="col-sm-8">
+            <select id="cbRate" name="">
+                <option value="0">
+                    --------------------------------------
+                </option>
+                @foreach (var item in Model)
+                {
+                    <option value="@item.Id">
+                        @item.Name
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $(document).ready(function () {
+        $("#exampleModal").click(function () {
+            $.ajax({
+                url: '/project/updatestatus',
+                method: "post",
+                data: {
+                    Id: $("#txtJobId").val(),
+                    RateId1: $("#cbRate").val()
+                },
+                success: function () {
+                    hideSmallModal();
+                }
+            })
+        })
+    })
+</script>

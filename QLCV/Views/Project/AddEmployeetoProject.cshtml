@@ -1,0 +1,16 @@
+﻿@model List<QLCV.Models.Employee>
+<div id="form-add-employee">
+    <select id="cbEmployee" style="width:500px" class="form-control multi-select" multiple>
+        @foreach(var item in Model)
+        {
+            <option value="@item.Id">
+                @item.Name
+            </option>
+        }
+    </select>
+</div>
+
+<script>
+    $(".multi-select").select2();
+    project.registerEven();
+</script>
