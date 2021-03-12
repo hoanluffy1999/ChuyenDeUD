@@ -127,10 +127,10 @@
     //}
     function openUpdate(id) {
         $.ajax({
-            url: urlDomain + "/update?id=" + id,
+            url: urlDomain + "/updatejob?id=" + id,
             method: "Get",
             success: function (response) {
-                showContentModal(response, "Cập nhật đơn vị")
+                showContentModal(response, "Cập nhật nhiệm vụ")
             }
         });
         //$(".checkStatus").off("click").on('click', function (e) {

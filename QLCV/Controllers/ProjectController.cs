@@ -176,7 +176,9 @@ namespace QLCV.Controllers
             var data = _dbcontext.Jobs.FirstOrDefault(x => x.Id == model.Id);
             //data.Description = model.Description;
             //data.Name = model.Name;
-            data.Status = (byte) StatusEnum.InProgress;
+            data.Name = model.Name;
+            data.Description = model.Description;
+            
             var entry = _dbcontext.Entry(data); 
             entry.State = EntityState.Modified;
             _dbcontext.SaveChanges();
