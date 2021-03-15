@@ -15,66 +15,24 @@ namespace QLCV.Controllers
         {
             this._dbcontext = QLCVDbcontext.getInstance();
         }
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Login()
         {
-            ViewBag.title = "Danh sách tài khoản";
             return View();
         }
-        [HttpGet]
-        public ActionResult GetList(string name)
-        {
-            var data = _dbcontext.Accounts.Where(x => x.Status == 1 && (x.UserName.ToLower().Contains(name.ToLower()) || string.IsNullOrEmpty(name))).ToList();
-            return PartialView(data);
-        }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return PartialView();
-        }
+        
         [HttpPost]
-        public ActionResult Create(Account inputModel)
+        public ActionResult Login(LoginModel mode)
         {
-            inputModel.Status = 1;
-            _dbcontext.Accounts.Add(inputModel);
-            _dbcontext.SaveChanges();
-            return Json(new { result = true }); ;
-        }
-        [HttpGet]
-        public ActionResult Update(int id)
-        {
-            var entity = _dbcontext.Accounts.Find(id);
-            return PartialView(entity);
-        }
-        [HttpPost]
-        public ActionResult Update(Account inputModel)
-        {
-
-
-            var entity = _dbcontext.Accounts.Find(inputModel.Id);
-            if (entity == null)
+            var data = _dbcontext.Employees.Where(x => x.UserName.Equals(mode.UserName) && x.PassWord.Equals(mode.PassWord)).FirstOrDefault();
+            if(data != null)
             {
-                return Json(new { result = false });
+                Session["Account"] = new Employee();
+
+                Session["Account"] = data;
+                return Json(new { result = true });
             }
-            inputModel.Status = 1;
-            _dbcontext.Entry(entity).CurrentValues.SetValues(inputModel);
-            _dbcontext.SaveChanges();
-            return Json(new { result = true });
-        }
-        [HttpPost]
-        public ActionResult Delete(int id)
-        {
-
-
-            var entity = _dbcontext.Accounts.Find(id);
-
-            if (entity == null)
-            {
-                return Json(new { result = false });
-            }
-            entity.Status = 0;
-            _dbcontext.Entry(entity).CurrentValues.SetValues(entity);
-            _dbcontext.SaveChanges();
-            return Json(new { result = true }); ;
+            return Json(new { result = false });
         }
     }
 

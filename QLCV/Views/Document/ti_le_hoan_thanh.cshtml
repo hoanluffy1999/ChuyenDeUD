@@ -1,15 +1,15 @@
-﻿@model List<QLCV.Models.ViewModel.EmployeeViewModel>
+﻿@model List<QLCV.Models.ResourceDocument>
+
 <table style="width:100%;height:100%;" id="tblDisplay" class=" table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th style="text-align:center;width:5%;">STT</th>
-            <th style="width:20%">Tên</th>
-            <th style="width:20%">Tên phòng ban</th>
-            <th style="width:10%">Số điện thoại</th>
-            <th style="width:10%">Email</th>
-            <th style="width:10%">Ngày sinh</th>
-            <th style="width:10%">Giới tính</th>
-            <th style="text-align:center;width:10%">Thao tác</th>
+            <th style="width:20%">Tên nhân viên</th>
+            <th style="width:10%">Công việc hoàn thành</th>
+            <th style="width:10%">Công việc chờ duyệt </th>
+            <th style="width:10%">Công việc đang làm</th>
+            <th style="width:10%">Tổng</th>
+        
         </tr>
     </thead>
     <tbody>
@@ -17,34 +17,17 @@
         //@foreach (var item in Model)
         {
             var item = Model[i];
-        <tr id="row_@item.Id">
-            <td style=" text-align:center;width: 5%;">
-                @(i+1)
-            </td>
-            <td style="width:20%;">@item.Name</td>
-            <td style="width:20%;">@item.DepartmentName</td>
-            <td style="width:10%;">@item.Phone</td>
-            <td style="width:10%;">@item.Email</td>
-            <td style="width:10%;">@item.Birthday.GetValueOrDefault().ToString("dd/MM/yyyy") </td>
-            <td style="width:10%;">
-            @if (item.Sex == true)
-            {
-                <span>Nam</span>
-            }
-            else
-            {
-                <span>Nữ</span>
-            }
-            </td>
-          
-            <td style="text-align:center;width:10%;">
-
-                <a href="javascript:;" class="btn-delete" onclick="deleteItem(@item.Id)"><i class="fas fa-trash-alt"></i></a>
-                <a class="btn-update" href="javascript:;" onclick="openUpdate(@item.Id)"><i class="fas fa-edit"></i></a>
-
-
-            </td>
-        </tr>
+            <tr>
+                <td style=" text-align:center;width: 5%;">
+                    @(i+1)
+                </td>
+                <td style="width:20%;">@item.EmployeeName</td>
+                <td style="width:20%;">@item.Done</td>
+                <td style="width:10%;">@item.InProgress</td>
+                <td style="width:10%;">@item.ToDo</td>
+                <td style="width:10%;">@item.Total </td>
+                
+            </tr>
         }
     </tbody>
 </table>
@@ -60,7 +43,7 @@
     //});
     $(document).ready(function () {
         //setStatus();
-        setDataTable();
+        /*setDataTable();*/
 
     });
     $(".checkStatus").off("click").on('click', function (e) {
@@ -103,7 +86,7 @@
             "columnDefs": [
                 { "orderable": false, "targets": 2 },
                 { "orderable": false, "targets": 3 },
-          
+
             ],
             "language": {
                 "emptyTable": "Không tìm thấy dữ liệu"
@@ -170,5 +153,5 @@
         })
 
     }
-   
+
 </script>

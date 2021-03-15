@@ -9,6 +9,7 @@ namespace QLCV.Controllers
 {
     public class HomeController : Controller
     {
+        [CustomAuthen]
         public ActionResult Index()
         {
             return View();
@@ -20,7 +21,12 @@ namespace QLCV.Controllers
 
             return View();
         }
+        public ActionResult NoPermission()
+        {
+            
 
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -14,6 +14,12 @@ namespace QLCV.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.ProjectEmployees = new HashSet<ProjectEmployee>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> DepartmentId { get; set; }
         public string Name { get; set; }
@@ -22,5 +28,12 @@ namespace QLCV.Models
         public Nullable<System.DateTime> Birthday { get; set; }
         public string Phone { get; set; }
         public Nullable<byte> Status { get; set; }
+        public string UserName { get; set; }
+        public string PassWord { get; set; }
+        public string Role { get; set; }
+    
+        public virtual Department Department { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
     }
 }

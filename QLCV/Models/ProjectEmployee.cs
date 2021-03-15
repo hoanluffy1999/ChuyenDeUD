@@ -17,5 +17,8 @@ namespace QLCV.Models
         public int Id { get; set; }
         public Nullable<int> ProjectId { get; set; }
         public Nullable<int> EmployId { get; set; }
+    
+        public virtual Employee Employee { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

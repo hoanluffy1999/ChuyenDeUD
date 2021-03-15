@@ -17,6 +17,10 @@
         <EntityTypeShape EntityType="ChuyenDeModel.Role" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChuyenDeModel.sysdiagram" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ChuyenDeModel.Task" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ChuyenDeModel.FK_Employees_Departments" />
+        <AssociationConnector Association="ChuyenDeModel.FK_ProjectEmployees_Employees" />
+        <AssociationConnector Association="ChuyenDeModel.FK_Jobs_Projects" />
+        <AssociationConnector Association="ChuyenDeModel.FK_ProjectEmployees_Projects" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,5 +23,7 @@ namespace QLCV.Models
         public byte Status { get; set; }
         public int ProjectId { get; set; }
         public Nullable<int> RateId1 { get; set; }
+    
+        public virtual Project Project { get; set; }
     }
 }

@@ -45,6 +45,9 @@
           <Property Name="Birthday" Type="datetime" />
           <Property Name="Phone" Type="nchar" MaxLength="10" />
           <Property Name="Status" Type="tinyint" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="150" />
+          <Property Name="Role" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Jobs">
           <Key>
@@ -123,6 +126,54 @@
           <Property Name="RateId" Type="int" />
           <Property Name="CreatedDate" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Employees_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectEmployees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="ProjectEmployees" Type="Self.ProjectEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectEmployees">
+              <PropertyRef Name="EmployId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectEmployees_Projects">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="ProjectEmployees" Type="Self.ProjectEmployees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectEmployees">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ChuyenDeModelStoreContainer">
           <EntitySet Name="Account_Roles" EntityType="Self.Account_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
@@ -136,6 +187,22 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Departments" Association="Self.FK_Employees_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Projects" Association="Self.FK_Jobs_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEmployees_Employees" Association="Self.FK_ProjectEmployees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="ProjectEmployees" EntitySet="ProjectEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEmployees_Projects" Association="Self.FK_ProjectEmployees_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectEmployees" EntitySet="ProjectEmployees" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -168,6 +235,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Descriptions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Employees" Relationship="ChuyenDeModel.FK_Employees_Departments" FromRole="Department" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -181,6 +249,11 @@
           <Property Name="Birthday" Type="DateTime" Precision="3" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Status" Type="Byte" />
+          <Property Name="UserName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="ChuyenDeModel.FK_Employees_Departments" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="ProjectEmployees" Relationship="ChuyenDeModel.FK_ProjectEmployees_Employees" FromRole="Employee" ToRole="ProjectEmployee" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -195,6 +268,7 @@
           <Property Name="Status" Type="Byte" Nullable="false" />
           <Property Name="ProjectId" Type="Int32" Nullable="false" />
           <Property Name="RateId1" Type="Int32" />
+          <NavigationProperty Name="Project" Relationship="ChuyenDeModel.FK_Jobs_Projects" FromRole="Job" ToRole="Project" />
         </EntityType>
         <EntityType Name="Permission">
           <Key>
@@ -211,6 +285,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProjectId" Type="Int32" />
           <Property Name="EmployId" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="ChuyenDeModel.FK_ProjectEmployees_Employees" FromRole="ProjectEmployee" ToRole="Employee" />
+          <NavigationProperty Name="Project" Relationship="ChuyenDeModel.FK_ProjectEmployees_Projects" FromRole="ProjectEmployee" ToRole="Project" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -221,6 +297,8 @@
           <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="StartDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Byte" />
+          <NavigationProperty Name="Jobs" Relationship="ChuyenDeModel.FK_Jobs_Projects" FromRole="Project" ToRole="Job" />
+          <NavigationProperty Name="ProjectEmployees" Relationship="ChuyenDeModel.FK_ProjectEmployees_Projects" FromRole="Project" ToRole="ProjectEmployee" />
         </EntityType>
         <EntityType Name="Rate">
           <Key>
@@ -272,7 +350,71 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <AssociationSet Name="FK_Employees_Departments" Association="ChuyenDeModel.FK_Employees_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEmployees_Employees" Association="ChuyenDeModel.FK_ProjectEmployees_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="ProjectEmployee" EntitySet="ProjectEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Projects" Association="ChuyenDeModel.FK_Jobs_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectEmployees_Projects" Association="ChuyenDeModel.FK_ProjectEmployees_Projects">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectEmployee" EntitySet="ProjectEmployees" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Employees_Departments">
+          <End Type="ChuyenDeModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="ChuyenDeModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectEmployees_Employees">
+          <End Type="ChuyenDeModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="ChuyenDeModel.ProjectEmployee" Role="ProjectEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectEmployee">
+              <PropertyRef Name="EmployId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Projects">
+          <End Type="ChuyenDeModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="ChuyenDeModel.Job" Role="Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectEmployees_Projects">
+          <End Type="ChuyenDeModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="ChuyenDeModel.ProjectEmployee" Role="ProjectEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectEmployee">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -313,6 +455,9 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="ChuyenDeModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

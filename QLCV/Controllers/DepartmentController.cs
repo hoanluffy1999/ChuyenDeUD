@@ -15,6 +15,7 @@ namespace QLCV.Controllers
         {
             this._dbcontext = QLCVDbcontext.getInstance();
         }
+        [CustomAuthen("1")]
         public ActionResult Index()
         {
             ViewBag.title = "Danh sách phòng ban";

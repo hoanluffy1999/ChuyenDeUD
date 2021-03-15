@@ -26,7 +26,7 @@ namespace QLCV.Controllers
         [HttpGet]
         public ActionResult GetList(string name)
         {
-            var data = _dbcontext.Projects.Where(x => x.Status == 1 &&( x.Name.ToLower().Contains(name.ToLower()) || string.IsNullOrEmpty(name))).ToList();
+            var data = _dbcontext.Projects.Where(x => x.Status == 1/* &&( x.Name.ToLower().Contains(name.ToLower()) || string.IsNullOrEmpty(name))*/).ToList();
             return PartialView(data);
         }
         [HttpGet]

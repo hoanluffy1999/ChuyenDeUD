@@ -14,9 +14,18 @@ namespace QLCV.Models
     
     public partial class Department
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Department()
+        {
+            this.Employees = new HashSet<Employee>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Descriptions { get; set; }
         public Nullable<byte> Status { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
